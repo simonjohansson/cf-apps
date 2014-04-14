@@ -27,10 +27,21 @@ def apps_in_space(space)
     {
       :name => app.name,
       :urls => app.urls,
+      :healthy => app.healthy?,
+      :instance_count => app_status(app)
     }
   }
 end
 
+def app_status(app)
+  if app.healthy?
+    instances = app.instances
+    num_instances = instances.length
+    num_running = instances.select { |i| i.status == "RUNNING" }.length
+    "(#{num_running}/#{num_instances})"
+  else
+    "BrOkEn"
+  end
 end
 
 def get_connection
