@@ -3,15 +3,16 @@
   %head
     %title Apps running in cf.
     %link{:rel => 'stylesheet', :type => 'text/css', :href => '/style.css'}
+
   %body
     - @data.each do |org|
-      .org
+      %h1.org
         = org[:name]
       - org[:spaces].each do |space|
-        .space
+        %h2.space
           = space[:name]
         - space[:apps].each do |app|
-          .app{"healthy" => "#{app[:healthy]}"}
+          %h3.app{"healthy" => "#{app[:healthy]}"}
             = "#{app[:name]} #{app[:instance_count]}"
           - app[:urls].each do |url|
             .url
