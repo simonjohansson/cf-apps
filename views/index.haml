@@ -5,16 +5,21 @@
     %link{:rel => 'stylesheet', :type => 'text/css', :href => '/style.css'}
 
   %body
-    - @cf_data.each do |org|
-      %h1.org
-        = org[:name]
-      - org[:spaces].each do |space|
-        %h2.space
-          = space[:name]
-        - space[:apps].each do |app|
-          %h3.app
-            .circle{"healthy" => "#{app[:healthy]}"}
-            = "#{app[:name]} #{app[:instance_count]}"
-          - app[:urls].each do |url|
-            .url
-              %a{:href => "#{url}"}> #{url}
+    .apps
+      - @cf_data.each do |org|
+        %h1.org
+          = org[:name]
+          - org[:spaces].each do |space|
+            %h2.space
+              = space[:name]
+              - space[:apps].each do |app|
+                %h3.app
+                  .circle{"healthy" => "#{app[:healthy]}"}
+                  = "#{app[:name]} #{app[:instance_count]}"
+                  - app[:urls].each do |url|
+                    .url
+                      %a{:href => "#{url}"}> #{url}
+    .bosh
+      This is bosh data.
+      %br
+      Like vm state and stuff like that.

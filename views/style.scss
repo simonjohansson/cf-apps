@@ -10,33 +10,39 @@ body {
     text-decoration:none;
   }
 
-  .org {
-  }
+  .apps {
+    float:left;
+    .space {
+      padding-left:25px;
+    }
 
-  .space {
-    padding-left:25px;
-  }
+    .app {
+      padding-left:50px;
+    }
 
-  .app {
-    padding-left:50px;
-  }
+    .circle{
+      -webkit-border-radius:8px;
+      -moz-border-radius:8px;
+      border-radius:8px;
+      border:1px solid #657b83;
+      width:10px;
+      height:10px;
+      display:inline-block;
+      vertical-align:middle;
+      background-color:#859900;
+      &[healthy="false"]{
+        background-color:#cb4b16;
+      }
+    }
 
-  .circle{
-    -webkit-border-radius:8px;
-    -moz-border-radius:8px;
-    border-radius:8px;
-    border:1px solid #657b83;
-    width:10px;
-    height:10px;
-    display:inline-block;
-    vertical-align:middle;
-    background-color:#859900;
-    &[healthy="false"]{
-      background-color:#cb4b16;
+    .url {
+      padding-left:75px;
     }
   }
 
-  .url {
-    padding-left:75px;
+  .bosh{
+    float:left;
+    padding-left:10px;
   }
+
 }
