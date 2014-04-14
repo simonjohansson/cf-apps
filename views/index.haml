@@ -11,8 +11,8 @@
         .space
           = space[:name]
         - space[:apps].each do |app|
-          .app
-            = app[:name]
+          .app{"healthy" => "#{app[:healthy]}"}
+            = "#{app[:name]} #{app[:instance_count]}"
           - app[:urls].each do |url|
             .url
               = url
