@@ -17,9 +17,6 @@ body {
 
   .app {
     padding-left:50px;
-    &[healthy="false"]{
-      color:red;
-    }
   }
 
   .circle{
