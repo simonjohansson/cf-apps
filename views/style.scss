@@ -2,9 +2,11 @@
 
 body {
   font: 100% Open Sans, sans-serif;
+  background-color:#073642;
+  color:#657b83;
 
   a {
-    color:grey;
+    color:#586e75;
     text-decoration:none;
   }
 
@@ -28,9 +30,9 @@ body {
     height:10px;
     display:inline-block;
     vertical-align:middle;
-    background-color:green;
+    background-color:#859900;
     &[healthy="false"]{
-      background-color:red;
+      background-color:#cb4b16;
     }
   }
 
