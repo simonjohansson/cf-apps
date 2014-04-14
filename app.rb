@@ -26,7 +26,7 @@ def apps_in_space(space)
   space.apps.map { |app|
     {
       :name => app.name,
-      :urls => app.urls,
+      :urls => app.urls.map { |url| ['http://', url].join ''},
       :healthy => app.healthy?,
       :instance_count => app_status(app)
     }
