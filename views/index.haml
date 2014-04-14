@@ -12,7 +12,8 @@
         %h2.space
           = space[:name]
         - space[:apps].each do |app|
-          %h3.app{"healthy" => "#{app[:healthy]}"}
+          %h3.app
+            .circle{"healthy" => "#{app[:healthy]}"}
             = "#{app[:name]} #{app[:instance_count]}"
           - app[:urls].each do |url|
             .url

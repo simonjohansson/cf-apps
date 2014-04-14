@@ -17,6 +17,21 @@ body {
     }
   }
 
+  .circle{
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    width:10px;
+    height:10px;
+    display:inline-block;
+    vertical-align:middle;
+    background-color:green;
+    &[healthy="false"]{
+      background-color:red;
+    }
+  }
+
   .url {
     padding-left:75px;
   }
