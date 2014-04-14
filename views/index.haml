@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title Apps running in cf.
+    %link{:rel => 'stylesheet', :type => 'text/css', :href => '/style.css'}
+  %body
+    - @data.each do |org, spaces|
+      .org
+        = org
+      - spaces.each do |space, apps|
+        .space
+          = space
+        - apps.each do |app, urls|
+          .app
+            = app
+          - urls.each do |url|
+            .url
+              = url
