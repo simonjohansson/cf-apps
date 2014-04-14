@@ -5,19 +5,32 @@ require 'haml'
 require 'sass'
 
 def create_data_dict(client)
-  Hash[client.organizations.map { |org| [org.name, spaces_in_org(org)] }]
+  client.organizations.map { |org|
+    {
+      :name => org.name,
+      :spaces => spaces_in_org(org)
+    }
+  }
 end
 
 def spaces_in_org(org)
-  Hash[org.spaces.map { |space| [space.name, apps_in_space(space)] }]
+  org.spaces.map { |space|
+    {
+      :name => space.name,
+      :apps => apps_in_space(space)
+    }
+  }
 end
 
 def apps_in_space(space)
-  Hash[space.apps.map { |app| [app.name, urls_bound_to_app(app)] }]
+  space.apps.map { |app|
+    {
+      :name => app.name,
+      :urls => app.urls,
+    }
+  }
 end
 
-def urls_bound_to_app(app)
-  app.urls
 end
 
 def get_connection
