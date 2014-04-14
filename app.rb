@@ -40,7 +40,7 @@ def app_status(app)
     num_running = instances.select { |i| i.status == "RUNNING" }.length
     "(#{num_running}/#{num_instances})"
   else
-    "BrOkEn"
+    "(0/?)"
   end
 end
 
