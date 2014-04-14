@@ -17,4 +17,4 @@
             = "#{app[:name]} #{app[:instance_count]}"
           - app[:urls].each do |url|
             .url
-              = url
+              %a{:href => "#{url}"}> #{url}
