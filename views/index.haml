@@ -5,7 +5,7 @@
     %link{:rel => 'stylesheet', :type => 'text/css', :href => '/style.css'}
 
   %body
-    - @data.each do |org|
+    - @cf_data.each do |org|
       %h1.org
         = org[:name]
       - org[:spaces].each do |space|
