@@ -56,7 +56,7 @@ def get_bosh_client(api_url, user, password)
 end
 
 def get_bosh_vm_data(client, deployment)
-  client.fetch_vm_state(deployment)
+  client.fetch_vm_state(deployment).sort_by {|vm| vm["job_name"]}
 end
 
 get '/' do
