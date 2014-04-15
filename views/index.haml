@@ -6,21 +6,61 @@
 
   %body
     .apps
+      %h1
+        Applications
       - @cf_data.each do |org|
-        %h1.org
+        %h2.org
           = org[:name]
           - org[:spaces].each do |space|
-            %h2.space
+            %h3.space
               = space[:name]
               - space[:apps].each do |app|
-                %h3.app
+                %h4.app
                   .circle{"healthy" => "#{app[:healthy]}"}
                   = "#{app[:name]} #{app[:instance_count]}"
                   - app[:urls].each do |url|
                     .url
                       %a{:href => "#{url}"}> #{url}
     .bosh
-      - @vm_data.each do |vm|
-        %h3.heh
-          .circle{"state" => "#{vm['job_state']}"}
-          = "#{vm['job_name']}/#{vm['index']}"
+      %h1
+        Bosh VM status
+      %table{:border => "0" }
+        %tr
+          %td
+
+          %td
+            name
+          %td
+            ips
+          %td
+            load
+          %td
+            mem%
+          %td
+            disk%
+          %td
+            eph-disk%
+          %td
+            per-disk%
+        - @vm_data.each do |vm|
+          %tr
+            %td
+              .circle{"state" => "#{vm['job_state']}"}
+              %td
+                = "#{vm['job_name']}/#{vm['index']}"
+              %td
+                - vm["ips"].each do |ip|
+                  = ip
+              %td
+                = "#{vm['vitals']['load'].join ', '}"
+              %td
+                = "#{vm["vitals"]["mem"]["percent"]}%"
+              %td
+                = "#{vm["vitals"]["disk"]["system"]["percent"]}%"
+              %td
+                = "#{vm["vitals"]["disk"]["ephemeral"]["percent"]}%"
+              %td
+                - if vm["vitals"]["disk"]["persistent"]
+                  = "#{vm["vitals"]["disk"]["persistent"]["percent"]}%"
+                - else
+                  n/a
