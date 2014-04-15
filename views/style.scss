@@ -10,6 +10,24 @@ body {
     text-decoration:none;
   }
 
+  .circle{
+    -webkit-border-radius:8px;
+    -moz-border-radius:8px;
+    border-radius:8px;
+    border:1px solid #657b83;
+    width:10px;
+    height:10px;
+    display:inline-block;
+    vertical-align:middle;
+    background-color:#cb4b16;
+    &[healthy="true"]{
+      background-color:#859900;
+    }
+    &[state="running"]{
+      background-color:#859900;
+    }
+  }
+
   .apps {
     float:left;
     .space {
@@ -18,21 +36,6 @@ body {
 
     .app {
       padding-left:50px;
-    }
-
-    .circle{
-      -webkit-border-radius:8px;
-      -moz-border-radius:8px;
-      border-radius:8px;
-      border:1px solid #657b83;
-      width:10px;
-      height:10px;
-      display:inline-block;
-      vertical-align:middle;
-      background-color:#859900;
-      &[healthy="false"]{
-        background-color:#cb4b16;
-      }
     }
 
     .url {
