@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'cfoundry'
+require 'cli'
 require 'sinatra'
 require 'haml'
 require 'sass'
@@ -50,10 +51,17 @@ def get_cf_client(api_url, username, password)
   client
 end
 
+def get_bosh_client(api_url, user, password)
+ Bosh::Cli::Client::Director.new(api_url, user, password)
+end
+
+def get_bosh_vm_data(client, deployment)
+  client.fetch_vm_state(deployment)
+end
+
 get '/' do
-  @cf_data = create_data_dict(get_cf_client())
-  #@data = [{:name=>"system_domain", :spaces=>[]}, {:name=>"casper", :spaces=>[{:name=>"dev", :apps=>[{:name=>"casper-dash", :urls=>["casper-dash.cf1.test.i.springer.com", "cd.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(2/2)"}, {:name=>"trackdash", :urls=>["trackdash.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"83b9723f95b35961a430af269876dc29", :urls=>["env.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"myfirstcfapp", :urls=>["myfirstcfapp.cf1.test.i.springer.com"], :healthy=>false, :instance_count=>"(0/?)"}, {:name=>"48a26f6ba20f0075cc3d39e95ffde69c", :urls=>["env.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"92242dd4f1fc53ae597809baeb0d3210", :urls=>["env.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"springer-token-service", :urls=>["springer-token-service.cf1.test.i.springer.com", "chris-token-service.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"content-api", :urls=>["chris-token-service.cf1.test.i.springer.com"], :healthy=>false, :instance_count=>"(0/?)"}, {:name=>"user-business-partners-service", :urls=>["user-business-partners-service.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"springer-user-service", :urls=>["springer-user-service.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"hipkeeper", :urls=>["hipkeeper.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}, {:name=>"cf-env-hector", :urls=>["cf-env-hector.cf1.test.i.springer.com"], :healthy=>false, :instance_count=>"(0/?)"}, {:name=>"trackanalog", :urls=>["trackanalog.cf1.test.i.springer.com"], :healthy=>false, :instance_count=>"(0/?)"}, {:name=>"asdf", :urls=>["asdf.cf1.test.i.springer.com"], :healthy=>false, :instance_count=>"(0/?)"}, {:name=>"cf-apps", :urls=>["cf-apps.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(2/2)"}]}, {:name=>"live", :apps=>[{:name=>"content-api", :urls=>["content-api-live.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}]}, {:name=>"staging", :apps=>[{:name=>"content-api", :urls=>["content-api-staging.cf1.test.i.springer.com"], :healthy=>false, :instance_count=>"(0/?)"}]}]}, {:name=>"cats-org", :spaces=>[{:name=>"cats-space", :apps=>[]}, {:name=>"persistent-space", :apps=>[{:name=>"persistent-app", :urls=>["persistent-app.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}]}]}, {:name=>"nemo", :spaces=>[{:name=>"dev", :apps=>[{:name=>"tincan-preview-int", :urls=>["tincan-preview-int.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}]}]}, {:name=>"sprcom", :spaces=>[{:name=>"dev", :apps=>[{:name=>"sprcom-price-service", :urls=>["prices.cf1.test.i.springer.com"], :healthy=>true, :instance_count=>"(1/1)"}]}]}]
   @cf_data = create_data_dict(get_cf_client(ENV['CF_API_URL'], ENV['CF_ADMIN_USER'], ENV['CF_ADMIN_PASSWORD']))
+  @vm_data = get_bosh_vm_data(get_bosh_client(ENV['BOSH_API_URL'], ENV['BOSH_ADMIN_USER'], ENV['BOSH_ADMIN_PASSWORD']), ENV['BOSH_DEPLOYMENT'])
   haml :index
 end
 
