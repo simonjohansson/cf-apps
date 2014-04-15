@@ -20,6 +20,7 @@
                     .url
                       %a{:href => "#{url}"}> #{url}
     .bosh
-      This is bosh data.
-      %br
-      Like vm state and stuff like that.
+      - @vm_data.each do |vm|
+        %h3.heh
+          .circle{"state" => "#{vm['job_state']}"}
+          = "#{vm['job_name']}/#{vm['index']}"
