@@ -27,11 +27,12 @@ $ shotgun
 
 ```
 
-$ git clone https://github.com/simonjohansson/cf-apps.git
+$ git clone https://github.com/simonjohansson/cf-apps.git && cd cf-apps
 $ cf push
 $ cf set-env cf-apps CF_API_URL http://api.domain.com
 $ cf set-env cf-apps CF_ADMIN_USER admin
 $ cf set-env cf-apps CF_ADMIN_PASSWORD password
+$ cf set-env cf-apps BOSH_API_URL https://123.123.123.123:25555
 $ cf set-env cf-apps BOSH_ADMIN_USER admin
 $ cf set-env cf-apps BOSH_ADMIN_PASSWORD password
 $ cf set-env cf-apps BOSH_DEPLOYMENT cloudfoundrydeploymentname
